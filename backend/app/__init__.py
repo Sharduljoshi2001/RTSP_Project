@@ -17,7 +17,9 @@ def create_app():
     #importing and registering blueprints (routes)
     from app.routes.video_routes import video_bp
     from app.routes.main_routes import main_bp
+    from app.routes.overlay_routes import overlay_bp
     #registering the video blueprint
     app.register_blueprint(video_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(overlay_bp)
     return app
