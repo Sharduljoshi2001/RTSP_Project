@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Overlay from "./Overlay";
 import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa"; // Icons for controls
@@ -6,7 +5,7 @@ import { FaPlay, FaPause, FaVolumeMute, FaVolumeUp } from "react-icons/fa"; // I
 const VideoPlayer = () => {
   const videoUrl = "http://127.0.0.1:5000/video_feed"; 
   
-  // State
+  // State Management here
   const [overlays, setOverlays] = useState([]); 
   const [textInput, setTextInput] = useState(""); 
   const [imageInput, setImageInput] = useState(""); 
@@ -15,7 +14,7 @@ const VideoPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false); // Default video OFF
   const [isMuted, setIsMuted] = useState(false);     // Fake Volume Control
 
-  // Load overlays
+  // Loading overlays
   useEffect(() => {
     fetchOverlays();
   }, []);
@@ -69,7 +68,7 @@ const VideoPlayer = () => {
     } catch (error) { console.error("Error deleting:", error); }
   };
 
-  // Toggle Play/Pause
+  // Toggle Play/Pause btn
   const togglePlay = () => setIsPlaying(!isPlaying);
 
   return (
@@ -85,7 +84,7 @@ const VideoPlayer = () => {
                 <input type="text" className="form-control" placeholder="Image URL..." value={imageInput} onChange={(e) => setImageInput(e.target.value)} />
                 <button className="btn btn-success" onClick={addImageOverlay}>Logo</button>
             </div>
-             {/* Playback Controls (Requirement fulfilled) */}
+             {/* Playback Controls */}
             <div className="col-md-4 d-flex gap-2 justify-content-end">
                 <button className={`btn ${isPlaying ? 'btn-warning' : 'btn-success'} w-50`} onClick={togglePlay}>
                    {isPlaying ? <><FaPause /> Pause Stream</> : <><FaPlay /> Start Stream</>}
@@ -125,7 +124,7 @@ const VideoPlayer = () => {
             </div>
         )}
 
-        {/* Overlays are visible even if paused (allows editing while paused) */}
+        {/* Overlays are visible even if paused */}
         {overlays.map((overlay) => (
           <Overlay
             key={overlay._id}
